@@ -7,10 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Shop Homepage - Start Bootstrap Template</title>
-
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrab/bootstrap.min.css' %}" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="{% static 'css/custom/shop-homepage.css' %}" rel="stylesheet">
   </head>
@@ -20,7 +18,7 @@
       <div class="container">
         <a class="navbar-brand" href="{% url 'center:center.home' %}">Start Bootstrap</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
@@ -45,24 +43,30 @@
         </div>
       </div>
     </nav>
-
     <!-- Page Content -->
     <div class="container">
       <div class="row">
         <div class="col-lg-3">
           <h1 class="my-4">Shop Name</h1>
+          <h4>Category filter</h4>
           <div class="list-group">
-              {% for cat in cats %}
-                  {% if cat.id != catName %}
-                    <a href="{% url 'center:center.home' %}?catid={{ cat.id }}" class="list-group-item">{{ cat }}</a>
-                  {% else %}
-                    <a style="background-color: #5f2" href="{% url 'center:center_home_cat' cat.id%}" class="list-group-item">{{ cat }}</a>
-                  {% endif %}
-              {% endfor %}  
+            {% for cat in cats %}
+              {% if cat.id != catNo %}
+                <a href="{% url 'center:center.home' %}?catid={{ cat.id }}" class="list-group-item">{{ cat }}</a>
+              {% else %}
+                <a href="{% url 'center:center.home' %}?catid={{ cat.id }}" style="background-color: #5f2" class="list-group-item">{{ cat }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <h4>Price filter</h4>
+          <div class="list-group">
+            <a href="{% url 'center:center.home' %}?catid={{ catNo }}&lt=50&gt=0" class="list-group-item">     <  50 </a>
+            <a href="{% url 'center:center.home' %}?catid={{ catNo }}&lt=100&gt=50" class="list-group-item">50  ... 100</a>
+            <a href="{% url 'center:center.home' %}?catid={{ catNo }}&lt=500&gt=100" class="list-group-item">100 ... 500</a>
+            <a href="{% url 'center:center.home' %}?catid={{ catNo }}&lt=1000000&gt=500" class="list-group-item">     >  500</a>
           </div>
         </div>
         <!-- /.col-lg-3 -->
-
         <div class="col-lg-9">
           <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -91,23 +95,23 @@
             </a>
           </div>
           <div class="row">
-{% for prod in prods %}
-            <div class="col-lg-4 col-md-6 mb-4">
-              <div class="card h-100">
-                <a href="#"><img class="card-img-top" src="{{ prod.photo.url }}" alt=""></a>
-                <div class="card-body">
-                  <h4 class="card-title">
+            {% for prod in prods %}
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="{{ prod.photo.url }}" alt=""></a>
+                  <div class="card-body">
+                    <h4 class="card-title">
                     <a href="#">{{ prod }}</a>
-                  </h4>
-                  <h5>${{ prod.price|floatformat}}</h5>
-                  <p class="card-text">{{ prod.description}}</p>
-                </div>
-                <div class="card-footer">
-                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                    </h4>
+                    <h5>${{ prod.price|floatformat}}</h5>
+                    <p class="card-text">{{ prod.description}}</p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                  </div>
                 </div>
               </div>
-            </div>
-{% endfor %}
+            {% endfor %}
           </div>
           <!-- /.row -->
         </div>
@@ -116,33 +120,30 @@
       <!-- /.row -->
     </div>
     <!-- /.container -->
-<div class="pagination container justify-content-center">
-    <span class="step-links">
+    <div class="pagination container justify-content-center">
+      <span class="step-links">
         {% if prods.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ prods.previous_page_number }}">previous</a>
+          <a href="?page=1">&laquo; first</a>
+          <a href="?page={{ prods.previous_page_number }}">previous</a>
         {% endif %}
-
         <span class="current">
-            Page {{ prods.number }} of {{ prods.paginator.num_pages }}.
+          Page {{ prods.number }} of {{ prods.paginator.num_pages }}.
         </span>
-
         {% if prods.has_next %}
-            <a href="?page={{ prods.next_page_number }}">next</a>
-            <a href="?page={{ prods.paginator.num_pages }}">last &raquo;</a>
+          <a href="?page={{ prods.next_page_number }}">next</a>
+          <a href="?page={{ prods.paginator.num_pages }}">last &raquo;</a>
         {% endif %}
-    </span>
-</div>
+      </span>
+    </div>
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        <p class="m-0 text-center text-white">Copyright &copy; My Online Store 2020</p>
       </div>
       <!-- /.container -->
     </footer>
-
     <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'center/jquery/jquery.min.js' %"></script>
+    <script src="{% static 'center/bootstrap/js/bootstrap.bundle.min.js' %"></script>
   </body>
 </html>
