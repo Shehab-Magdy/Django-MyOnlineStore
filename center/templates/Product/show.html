@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Product</title>
+	<style>
+		table, th, td {
+		  border: 1px solid black;
+		    border-collapse: collapse;
+		}
+		th, td {
+		  padding: 15px;
+		}
+	</style>
+</head>
+<body>
+	<a href="{% url 'center:product_addnew' %}"></a>
+	<table class="css-serial" width="50%">
+		<tr>
+			<th>
+				id
+			</th>
+			<th>
+				name
+			</th>	
+			<th>
+				price
+			</th>
+			<th>
+				description
+			</th>
+			<th>
+				category
+			</th>
+			<th>
+				deteals
+			</th>
+		</tr>
+		<tr>
+			<td>{{ product.id }}</td>
+			<td>	
+				{{ product.name }}
+			</td>
+			<td>	
+				{{ product.price }}
+			</td>
+			<td>	
+				{{ product.description }}
+			</td>
+			<td>	
+				{{ product.category }}
+			</td>
+			<th>
+				<a href="/center/product/{{ product.id }}/delete/">Delete</a>;
+				<a href="/center/product/{{ product.id }}/update/">Update</a>
+			</th>
+		</tr>
+	</table>
+	<form>
+  		<input type="button" value="Go back!" onclick="history.back()">
+	</form>
+	<a href="{% url 'center:Product_List' %}">Back by url</a>
+</body>
+</html>

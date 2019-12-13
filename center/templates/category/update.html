@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>update a category</title>
+</head>
+<body>
+	{% if category %}
+	<form method="Post" action="{% url 'center:category_update' category.id %}">
+
+		{% csrf_token %}
+		name: <input type="text" name="cat_name" value="{{ category.name }}" required="True"> <br>
+		description: <input type="text" name="cat_desc" value="{{ category.description }}" required="True"> <br>
+		<input type="Submit" value="Submit">
+
+	</form>
+	{% else %} 
+	<form method="Post" action="{% url 'center:category_addnew' %}">
+
+		{% csrf_token %}
+		no obj<br>
+		name: <input type="text" name="cat_name" required="True"> <br>
+		description: <input type="text" name="cat_desc" required="True"> <br>
+		<input type="Submit" value="Submit">
+
+	</form>
+	{% endif %}
+</body>
+</html>

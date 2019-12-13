@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Categories</title>
+	<style>
+table, th, td {
+  border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+</head>
+<body>
+	<a href="{% url 'center:category_addnew' %}">Add new Category</a>
+	<br>
+	<table width="50%">
+		<tr>
+			<th>
+				id
+			</th>
+			<th>
+				name
+			</th>
+			<th>
+				description
+			</th>	
+		</tr>
+{% for cat in categories %}
+		<tr>
+			<td>	
+				{{ forloop.counter }}
+			</td>
+			<td>	
+				{{ cat.name }}
+			</td>
+			<th>
+				<a href="category/{{ cat.id }}">Details</a> , 
+				<a href="{% url 'center:category.show' cat.id %}">Details by url</a>,
+				<a href="/category/{{ cat.id }}/delete/">Delete</a>
+			</th>
+		</tr>
+{% endfor %}
+	</table>
+</body>
+</html>

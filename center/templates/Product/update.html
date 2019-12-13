@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>update product No. {{ product.id }}</title>
+</head>
+<body>
+		{% if product %}
+	<form method="Post" action="{% url 'center:product_update' product.id %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		name: <input type="text" name="prod_name" value="{{ product.name }}" required="True"> <br>
+		description: <input type="text" name="Prod_desc" value="{{ product.description }}" required="True"> <br>
+		price:<input type="float" name="prod_price" value="{{ product.price }}" required="true"> <br>
+		photo: <input type="file" name="prod_photo" required><br>
+		category_name:<select name="prod_cat" required="true"> <br>
+			{% for cat in category %}
+				{% if cat.id ==  product.category.id %}
+					<option value="{{ cat.id }}" selected="true">{{ cat.name }}</option>
+				{% endif %}
+					<option value="{{ cat.id }}">{{ cat.name }}</option>
+			{% endfor%}
+					</select><br>
+		<input type="Submit" value="Submit">
+	</form>
+		{% else %}
+	<form method="post" action="{% url 'center:product_addnew' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		name:<input type="text" name="prod_name" required> <br>
+		price:<input type="float" name="prod_price" required> <br>
+		description:<input type="text" name="prod_desc" required> <br>
+		photo: <input type="file" name="prod_photo" required><br>
+		category_name:<select name="prod_cat" required> <br>
+					{% for cat in categories %}
+						<option value="{{ cat.id }}">{{ cat.name }}</option>
+					{% endfor %}
+					</select><br>
+		<input type="Submit" value="Submit">
+	</form>
+		{% endif %}
+
+</body>
+</html>
