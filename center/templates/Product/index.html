@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Products</title>
-	<style>
-		table, th, td {
-		  border: 1px solid black;
-		    border-collapse: collapse;
-		}
-		th, td {
-		  padding: 15px;
-		}
-		.css-serial {
-		  counter-reset: serial-number;  /* Set the serial number counter to 0 */
-		}
+  <head>
+    <title>Products</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 15px;
+      }
+      .css-serial {
+        counter-reset: serial-number; /* Set the serial number counter to 0 */
+      }
 
-		.css-serial td:first-child:before {
-		  counter-increment: serial-number;  /* Increment the serial number counter */
-		  content: counter(serial-number);  /* Display the counter */
-		}
-	</style>
-</head>
-<body>
-		<a href="{% url 'center:product_addnew' %}">Add new product</a>
-<br>
-	<!--<table class="css-serial" width="50%">-->
-	<table width="50%">
-		<tr>
-			<th>
-				id
-			</th>
-			<th>
-				name
-			</th>	
-			<th>
-				category
-			</th>
-			<th>
-				deteals
-			</th>
-		</tr>
-{% for prod in products %}
-		<tr>
-			<td>
-				{{ forloop.counter }}
-			</td>
-			<td>	
-				{{ prod.name }}
-			</td>
-			<td>	
-				{{ prod.category }}
-			</td>
-			<th>
-				<a href="product/{{ prod.id }}">Details</a> , 
-				<a href="/product/{{ prod.id }}/delete/">Delete</a>
-			</th>
-		</tr>
-{% endfor %}
-	</table>
-</body>
+      .css-serial td:first-child:before {
+        counter-increment: serial-number; /* Increment the serial number counter */
+        content: counter(serial-number); /* Display the counter */
+      }
+    </style>
+  </head>
+  <body>
+    <a href="{% url 'center:product_addnew' %}">Add new product</a>
+    <br />
+    <!--<table class="css-serial" width="50%">-->
+    <table width="50%">
+      <tr>
+        <th>
+          id
+        </th>
+        <th>
+          name
+        </th>
+        <th>
+          category
+        </th>
+        <th>
+          deteals
+        </th>
+      </tr>
+      {% for prod in products %}
+      <tr>
+        <td>
+          {{ forloop.counter }}
+        </td>
+        <td>
+          {{ prod.name }}
+        </td>
+        <td>
+          {{ prod.category }}
+        </td>
+        <th>
+          <a href="product/{{ prod.id }}">Details</a> ,
+          <a href="/product/{{ prod.id }}/delete/">Delete</a>
+        </th>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
 </html>
