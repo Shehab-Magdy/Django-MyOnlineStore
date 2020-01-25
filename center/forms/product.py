@@ -1,10 +1,11 @@
 from django import forms
-
-class ProductForm (forms.form):
+from center.models import Category
+class ProductForm (forms.Form):
     name  = forms.CharField(label='name',max_length=40)
-	price = forms.FloatField()
+    price = forms.FloatField(help_text='Numeric value')
     description = forms.CharField(label='description',max_length=250)
-	photo = forms.ImageField(label='photo')
-	category = forms.InlineForeignKeyField()
-    ForeignKey(Category, on_delete = forms.CASCADE)
+    photo = forms.ImageField(label='photo')
+    # category = forms.ForeignKey(Category, on_delete = forms.CASCADE)
+    
+    # InlineForeignKeyField()
 
